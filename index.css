@@ -1,0 +1,51 @@
+body,html{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+body{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+.main{
+    width: 90vh;
+    aspect-ratio: 1;
+    background-color: rgb(147, 185, 80);
+    display: table; /* Set display to table */
+    table-layout: fixed; /* Set table layout to fixed */
+}
+.open{
+    background-color: hsla(32, 42%, 61%, 0.877);
+    font-size: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 0%;
+}
+tr:nth-child(odd) .open:nth-child(even),
+tr:nth-child(even) .open:nth-child(odd){
+    background-color: hsla(32, 34%, 54%, 0.877);
+}
+tr:nth-child(odd) .td:nth-child(even),
+tr:nth-child(even) .td:nth-child(odd){
+    background-color: rgb(124, 156, 68);
+}
+.td{
+    text-align: center;
+    overflow: hidden;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 0%;
+}
+.td:hover{
+    border: solid 3px rgb(0, 57, 0);
+    border-radius: 3px;
+}
+img{
+    height: 20px;
+    object-fit: contain;
+    padding: 0%;
+}
