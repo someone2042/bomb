@@ -2,6 +2,7 @@ const size = 10;//size of the main matrix
 const m = new Array(size);//the main matrix
 const bomb_nb=10;//number of bombs in the matrix
 let begain=true;
+let win=0;
 let fuck_this=0;
 
 for (let i = 0; i < size; i++) {
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             td.setAttribute('class','td');
             td.addEventListener("contextmenu", (e) => {
                 e.preventDefault();
-                if(m[i][j].flag==false)
+                if(m[i][j].flag==false && m[i][j].open==false)
                 {
                     let img=document.createElement('img');
                     img.setAttribute('src','icons8-flag-filled-48.png');
@@ -115,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 else
                 {
+                    if(m[i][j].flag)
                     td.removeChild(td.firstChild);
                     m[i][j].flag=false;
                 }
@@ -147,6 +149,7 @@ function press(id)
         }
         else
         {
+            win++;
             if(m[i][j].value==0)
             {
                 m[i][j].open=true;
@@ -167,11 +170,53 @@ function press(id)
                 if(m[i][j].value==4){document.getElementById(id).style.color='purple';}
                 if(m[i][j].value==5){document.getElementById(id).style.color='orange';}
             }
+            if(win==size*size-bomb_nb)
+            {
+                setTimeout(() => window.alert('you win'), 1000)
+                
+            }
+            
         }
     }
 }
 function pressAround(i,j)
 {
+    let cont=0;
+    
+    if(i!=0&& j!=0&& m[i-1][j-1].flag==true)
+    {
+        cont++;
+    }
+    if(i!=0&& m[i-1][j].flag==true)
+    {
+        cont++;
+    }
+    if(i!=0&& j!=size-1 && m[i-1][j+1].flag==true)
+    {
+        cont++;
+    }
+    if( j!=0&& m[i][j-1].flag==true)
+    {
+        cont++;
+    }
+    if(j!=size-1 && m[i][j+1].flag==true)
+    {
+        cont++;
+    }
+    if(i!=size-1 &&  j!=0&& m[i+1][j-1].flag==true)
+    {
+        cont++;
+    }
+    if(i!=size-1 && m[i+1][j].flag==true)
+    {
+        cont++;
+    }
+    if(i!=size-1 && j!=size-1 && m[i+1][j+1].flag==true)
+    {
+        cont++;
+    }
+    if(cont!=m[i][j].value){return }
+
     if(i-1>=0&&j+1<=size-1&&m[i-1][j+1].open==false&&m[i-1][j+1].flag==false)
     {
         press((i-1)*size+j+1)  
